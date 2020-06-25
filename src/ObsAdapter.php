@@ -51,6 +51,8 @@ class ObsAdapter extends AbstractAdapter
         }
         $this->bucket = $bucketConfig['bucket'];
         $this->endpoint = $bucketConfig['endpoint'];
+        $this->isCName = $bucketConfig['isCName'];
+        $this->useSsl = $bucketConfig['sslVerify'];
         unset($this->client);
         $this->initClient();
         return $this;
