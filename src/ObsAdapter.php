@@ -76,6 +76,13 @@ class ObsAdapter extends AbstractAdapter
             'Expires' => $expires,
             'FormParams' => $formParams
         ]);
+        $originPolicy = $tokenModel->get("OriginPolicy");
+        $originPolicyArray = json_decode($originPolicy, true);
+        if (!$originPolicyArray) {
+            $originPolicy = str_replace("},]}", "}]}", $originPolicy);
+            $originPolicyArray = json_decode($originPolicy, true);
+        }
+        $tokenModel->set('OriginPolicy', $originPolicyArray);
         $tokenModel->add('host', $this->normalizeHost());
         return $tokenModel->toArray();
     }
