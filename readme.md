@@ -67,6 +67,26 @@ return [
     $defaultUploadTokenArray = $obs->uploadToken('objectname.txt');
     //切换到其他bucket
     $otherUploadTokenArray = $obs->bucket('video')->uploadToken('objectname2.txt');
+    
+    /**
+     * 获取签名URL
+     *
+     * @param string $key
+     * @param int $expires
+     * @param string $method
+     * @return string
+     */
+    $url = $obs->createSignedUrl($key, $expires = 3600, $method = "GET");
+    
+    /**
+     * 写入文件
+     * 
+     * @param string $path
+     * @param string $contents
+     * @param Config $config
+     * @return array|bool|false
+     */    
+    $writeStatus = $obs->write($key, $path);
 ```
 
 

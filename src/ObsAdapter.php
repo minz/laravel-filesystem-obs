@@ -108,9 +108,22 @@ class ObsAdapter extends AbstractAdapter
         return $tokenModel->get("SignedUrl");
     }
 
+    /**
+     * 写入文件
+     *
+     * @param string $path
+     * @param string $contents
+     * @param Config $config
+     * @return array|bool|false
+     */
     public function write($path, $contents, Config $config)
     {
-        // TODO: Implement write() method.
+        $this->client->putObject([
+            'Bucket' => $this->bucket,
+            'Key' => $path,
+            'SourceFile' => $contents
+        ]);
+        return true;
     }
 
     public function writeStream($path, $resource, Config $config)
